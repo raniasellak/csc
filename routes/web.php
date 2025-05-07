@@ -1,14 +1,16 @@
 <?php
 // routes/web.php
-
+/*
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\CelluleController;
 use App\Http\Controllers\BoutiqueController;
 use App\Http\Controllers\ContactController;
+*/
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,13 +25,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Routes publiques
-Route::get('/', [HomeController::class, 'index'])->name('accueil');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/profiles',[ProfileController::class,'index'])->name('profiles.index');
+
+
+Route::get('/profiles/create',[ProfileController::class,'create'])->name('create');
+/*
 // Routes pour les formations
 Route::prefix('formations')->group(function () {
     Route::get('/', [FormationController::class, 'index'])->name('formations.index');
     Route::get('/{formation}', [FormationController::class, 'show'])->name('formations.show');
 });
+
 
 // Routes pour les cellules
 Route::prefix('cellules')->group(function () {
@@ -74,4 +82,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
-});
+    
+});*/
