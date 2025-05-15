@@ -11,15 +11,22 @@
 </head>
 <body>
     @include('partial.nav')
+    @include('partial.flash')
+    @yield('styles')
+
+    
 
 
     <main>
-        @yield('main')
+        @yield('main') 
+        @yield('content')
 </main>
-
+   
     @include('partial.footer')
-     
-    
-    
+
+     @yield('scripts')
+    <script src="https://code.jquery.com/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14./dist/js/bootstrap.bundle.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
