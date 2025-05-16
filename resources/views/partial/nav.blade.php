@@ -20,9 +20,10 @@
           <!-- Route: accueil -->
           <a class="nav-link" href="{{route('home')}}">Accueil</a>
         </li>
+        
         <li class="nav-item">
           <!-- Route: à définir -->
-          <a class="nav-link" href="#">Formations</a>
+          <a class="nav-link" href="{{ route('formations.index') }}">Formations</a>
         </li>
         <li class="nav-item">
           <!-- Route: à définir -->
@@ -42,12 +43,35 @@
         </li>
       </ul>
       
-      <div class="auth-buttons">
-        <!-- Route: à définir pour la connexion -->
-        <a href="#" class="btn btn-outline connexion">Connexion</a>
+      <div class="d-flex align-items-center">
+        @guest
+        <!-- Boutons pour visiteurs non connectés -->
+        <a href="{{route('login.show')}}" class="btn btn-outline connexion me-2">Connexion</a>
+        <a href="{{route('create')}}" class="btn btn-primary inscription">Inscription</a>
+        @endguest 
         
-        <!-- Route: à définir pour l'inscription -->
-        <a href="#" class="btn btn-primary inscription">Inscription</a>
+        @auth
+        <!-- Boutons pour utilisateurs connectés -->
+        <a href="{{route('login.logout')}}" class="btn btn-outline connexion me-3">Déconnexion</a>
+        
+        <!-- Dropdown username -->
+        <div class="dropdown">
+          <button class="btn dropdown-toggle username-dropdown" type="button" id="dropdownMenuButton" 
+                  data-bs-toggle="dropdown" aria-expanded="false">
+            @if(Auth::check() && isset(Auth::user()->name))
+              {{ Auth::user()->name }}
+            @else
+              Utilisateur
+            @endif
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#">Mon profil</a></li>
+            <li><a class="dropdown-item" href="#">Paramètres</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{{route('login.logout')}}">Déconnexion</a></li>
+          </ul>
+        </div>
+        @endauth
       </div>
     </div>
   </div>
@@ -103,11 +127,6 @@
   }
   
   /* Styles pour les boutons d'authentification */
-  .auth-buttons {
-    display: flex;
-    gap: 10px;
-  }
-  
   .connexion {
     border: none;
     color: #333;
@@ -131,15 +150,53 @@
     background-color: #e67200;
   }
   
+  /* Style pour le dropdown username */
+  .username-dropdown {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+  }
+  
+  .username-dropdown:hover, 
+  .username-dropdown:focus {
+    background-color: #5a6268;
+    color: white;
+  }
+  
+  .dropdown-menu {
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border: 1px solid #eee;
+  }
+  
+  .dropdown-item {
+    padding: 0.5rem 1.5rem;
+    color: #333;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #FE7F02;
+  }
+  
   /* Media queries pour la responsivité */
   @media (max-width: 992px) {
-    .auth-buttons {
-      margin-top: 1rem;
-      justify-content: center;
-    }
-    
     .navbar-nav .nav-link {
       padding: 0.5rem 0;
+    }
+    
+    .d-flex {
+      flex-direction: column;
+      align-items: stretch !important;
+      margin-top: 1rem;
+    }
+    
+    .connexion, .inscription, .username-dropdown {
+      margin-bottom: 0.5rem;
+      text-align: center;
     }
   }
 </style>
