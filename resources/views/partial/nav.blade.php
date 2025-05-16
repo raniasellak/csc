@@ -23,7 +23,7 @@
         
         <li class="nav-item">
           <!-- Route: à définir -->
-          <a class="nav-link" href="#">Formations</a>
+          <a class="nav-link" href="{{ route('formations.index') }}">Formations</a>
         </li>
         <li class="nav-item">
           <!-- Route: à définir -->

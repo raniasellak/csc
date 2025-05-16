@@ -12,6 +12,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FormationController;
+use App\Http\Controllers\InscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +50,11 @@ Route::post('/password/email', [App\Http\Controllers\ForgotPasswordController::c
 Route::get('/password/reset/{token}', [App\Http\Controllers\ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('/password/reset', [App\Http\Controllers\ForgotPasswordController::class, 'resetPassword'])->name('password.update');
 
+Route::resource('formations', FormationController::class);
+
+
+
+Route::post('/formations/{formationId}/quick-register', [InscriptionController::class, 'quickRegister'])->name('inscriptions.quick');
 
 
 
